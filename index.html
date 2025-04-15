@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <title>مساعد القبول والتسجيل</title>
+  <style>
+    body { font-family: Arial, sans-serif; background: #f4f4f4; padding: 40px; }
+    .chat-box { max-width: 600px; margin: auto; background: white; padding: 20px; border-radius: 10px; box-shadow: 0 0 10px #ccc; }
+    .msg { padding: 10px; margin: 10px 0; border-radius: 8px; }
+    .user { background: #d0f0c0; text-align: right; }
+    .bot { background: #eee; text-align: left; }
+  </style>
+</head>
+<body>
+  <div class="chat-box">
+    <h2>مرحباً بك في مساعد القبول والتسجيل - جامعة السودان</h2>
+    <div id="chat"></div>
+    <input type="text" id="msg" placeholder="اكتب سؤالك هنا" style="width: 70%;" />
+    <button onclick="send()">إرسال</button>
+  </div>
+  <script>
+    function send() {
+      const msg = document.getElementById("msg").value;
+      if (!msg) return;
+      const chat = document.getElementById("chat");
+      chat.innerHTML += `<div class="msg user">${msg}</div>`;
+      document.getElementById("msg").value = "";
+      fetch("/webhook", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ message: msg })
+      })
+      .then(res => res.json())
+      .then(data => {
+        chat.innerHTML += `<div class="msg bot">${data.response}</div>`;
+      });
+    }
+  </script>
+</body>
+</html>

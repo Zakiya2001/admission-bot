@@ -1,0 +1,16 @@
+
+version: "3.1"
+intents:
+  - greet
+  - inquire_admission_deadline
+  - goodbye
+
+responses:
+  utter_greet:
+    - text: "مرحباً بك في مساعد القبول والتسجيل! كيف أقدر أساعدك؟"
+
+  utter_inquire_admission_deadline:
+    - text: "التقديم يبدأ في 1 يونيو وينتهي في 30 يوليو، لا تتأخر!"
+
+  utter_goodbye:
+    - text: "مع السلامة! أتمنى لك يوماً سعيداً."
